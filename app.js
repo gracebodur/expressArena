@@ -7,6 +7,7 @@ const app = express()
 //the first one is the Request object, 
 //here named req and the second is the Response object, here named res.
 app.get('/', (req, res) => {
+    console.log('The root path was called')
     res.send('Hello Express!')
 })
 
