@@ -2,7 +2,11 @@ const express = require('express')
 const morgan = require('morgan')
 
 const app = express()
+// This is middleware that requests pass through
+// on their way to the final handler
 app.use(morgan('dev'))
+
+//This is the final request handler
 
 //to create a get route we use the .get() method where PATH is 
 //the path on the server and HANDLER is a function to be executed 
