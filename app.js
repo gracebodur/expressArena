@@ -63,7 +63,7 @@ app.get('/greetings', (req, res) => {
     }
   
     //4. and 5. both name and race are valid so do the processing.
-    const greeting = `Greetings ${name} the ${race}, welcome to our kingdom.`;
+    const greeting = `Kamusta ${name} ikaw ay isang ${race}, Mabuhay ka!`;
   
     //6. send the response 
     res.send(greeting);
