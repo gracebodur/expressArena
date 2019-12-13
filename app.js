@@ -46,28 +46,51 @@ app.use(morgan('dev'))
 //     res.end(); //do not send any data back to the client
 // });
 
-app.get('/greetings', (req, res) => {
-    //1. get values from the request
-    const name = req.query.name;
-    const race = req.query.race;
+// app.get('/greetings', (req, res) => {
+//     //1. get values from the request
+//     const name = req.query.name;
+//     const race = req.query.race;
   
-    //2. validate the values
-    if(!name) {
-      //3. name was not provided
-      return res.status(400).send('Please provide a name');
-    }
+//     //2. validate the values
+//     if(!name) {
+//       //3. name was not provided
+//       return res.status(400).send('Please provide a name');
+//     }
   
-    if(!race) {
-      //3. race was not provided
-      return res.status(400).send('Please provide a race');
-    }
+//     if(!race) {
+//       //3. race was not provided
+//       return res.status(400).send('Please provide a race');
+//     }
   
-    //4. and 5. both name and race are valid so do the processing.
-    const greeting = `Kamusta ${name} ikaw ay isang ${race}, Mabuhay ka!`;
+//     //4. and 5. both name and race are valid so do the processing.
+//     const greeting = `Kamusta ${name} ikaw ay isang ${race}, Mabuhay ka!`;
   
-    //6. send the response 
-    res.send(greeting);
-  });
+//     //6. send the response 
+//     res.send(greeting);
+//   });
+
+
+// //server error
+//   app.get('/hello', (req, res) => {
+//     res
+//     .status(500)
+//     .send('Oops! I did it again')
+//   })
+
+//client error
+// app.get('/hello', (req, res) => {
+//   res
+//     .status(400)
+//     .send('Oops! You did it again')
+// })
+
+//no content error
+// app.get('/hello', (req, res) => {
+//   res
+//     .status(204)
+//     // .send('Here is some information')
+//     .end()
+// })
 
 app.listen(8000, () => {
     console.log('Express server is listening on port 8000!')
