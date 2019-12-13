@@ -78,7 +78,6 @@ drill.get('/lotto', (req, res) => {
     if(!numbers || numbers.length < 6) {
         return res.status(400).send('Please provide 6 numbers')
     }
-})
 
 let randomNumbers =[]
 
@@ -97,9 +96,17 @@ for(let i = 0; i <= 6; i++) {
 }
 // randomNumbers = randomNumbers.from({length: 20}, () => Math.floor(Math.random() * 20));
 
+if(counter < 4) {
+    res.send('Sorry you loose')
+} else if(counter === 4) {
+    res.send('Congratulations, you win a free ticket')
+} else if (counter === 5) {
+    res.send(' Congratulations! You win $100!')
+} else if (counter === 6) {
+    res.send('Wow! Unbelievable! You could have won the mega millions!')
+}
 
-
-
+})
 
 drill.listen(8000, () => {
     console.log('Express server is listening on port 8000!')
