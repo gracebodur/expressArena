@@ -12,17 +12,17 @@ drill.get('/sum', (req, res) => {
     const b = parseInt(req.query.b)
     
 
-    if(Number.isNaN(a) && Number.isNaN(b)) {
-        return res.status(400).send('Please provide a number');
+    if(Number.isNaN(a) || Number.isNaN(b)) {
+        return res.status(400).send('Please only provide numbers');
     }
 
-    // if(!a) {
-    //     return res.status(400).send('a is required');
-    // }
+    if(!a) {
+        return res.status(400).send('a is required');
+    }
 
-    // if(!b) {
-    //     return res.status(400).send('b is required');
-    // }
+    if(!b) {
+        return res.status(400).send('b is required');
+    }
 
     const c = a + b
     
@@ -41,20 +41,24 @@ drill.get('/cipher',(req, res) => {
     if(!text) {
         return res.status(400).send('text is required')
     }
-
-    if(!shift) {
-        return res.status(400).send('shift is required')
+    if(!shift || isNaN(shift)) {
+        return res.status(400).send('shift must be a number')
     }
 
-    if(Number.isNaN(shift)) {
-        return res.status(400).send('A number is required for shift')
-    }
+    const textArray = text.split('')
+    const newArray = textArray.map(letter => {
+        const letterCode = letter.charCodeAt(0)
+        if(letterCode == 122 || letter === 90 ){
+            const newLetter = String.fromCharCode((letterCode - 25) + shift)
+            return newLetter
+        } else {
+            const newLetter = String.fromCharCode(letterCode + shift)
+            return newLetter
+        }
 
-    const encrypt = text.split('').map(letter => {
-    const code = letter.charCodeAt(0) + shift
-        return String.fromCharCode(code)
     })
-    res.send(encrypt.join(''))
+    const newText = newArray.join('')
+    res.send(newText)
 })
 
 //Drill 3
@@ -69,9 +73,33 @@ drill.get('/cipher',(req, res) => {
 //If all 6 numbers match respond with "Wow! Unbelievable! You could have won the mega millions!".
 
 drill.get('/lotto', (req, res) => {
-    const { numbers } = req.query
+    const numbers = req.query.numbers
 
+    if(!numbers || numbers.length < 6) {
+        return res.status(400).send('Please provide 6 numbers')
+    }
 })
+
+let randomNumbers =[]
+
+for(let i = 0; i <= 6; i++) {
+    randomNumbers.push(Math.floor(Math.random() * 20))
+}
+
+let counter = 0;
+
+for(let i = 0; i <= 6; i++) {
+    const newNumber = Number(randomNumbers[i])
+    if(randomNumbers.indexOf(newNumber) >= 0) {
+        counter++
+    }
+
+}
+// randomNumbers = randomNumbers.from({length: 20}, () => Math.floor(Math.random() * 20));
+
+
+
+
 
 drill.listen(8000, () => {
     console.log('Express server is listening on port 8000!')
